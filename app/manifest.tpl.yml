@@ -1,10 +1,9 @@
 #version identifier
-# note that any instance of 'latest' will be replaced with the image tag
 manifest_version: 1
 
 version:
   name: V1
-  label: "Version One - patch latest"
+  label: "Version One - patch $VERSION_TAG"
   comment: "The first version of our Native Application that includes SPCS"
 
 
@@ -14,9 +13,9 @@ artifacts:
   setup_script: setup.sql
   container_services:
     images:
-      - /spcs_app/napp/img_repo/eap_frontend:latest
-      - /spcs_app/napp/img_repo/eap_backend:latest
-      - /spcs_app/napp/img_repo/eap_router:latest
+      - /spcs_app/napp/img_repo/eap_frontend:$VERSION_TAG
+      - /spcs_app/napp/img_repo/eap_backend:$VERSION_TAG
+      - /spcs_app/napp/img_repo/eap_router:$VERSION_TAG
 
 privileges:
  - CREATE COMPUTE POOL:

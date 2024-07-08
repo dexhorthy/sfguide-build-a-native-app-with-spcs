@@ -54,12 +54,28 @@ create view if not exists orders as select * from snowflake_sample_data.tpch_sf1
 
 --Step 5.1 - Get Image Repository URL
 --once we've created the database to store our images and na files we can find the image repository url
+use role naspcs_role;
 show image repositories in schema spcs_app.napp;
+
+-- 5.2 - Editor/Shell steps
+-- edit Makefile to set SNOWFLAKE_REPO
+-- $ make all
+--
 
 --Step 6.1 - Create Application Package and Grant Consumer Role Privileges
 --after we've uploaded all of the images and files for the native app we need to create our native app package
 --after creating the package we'll add a version to it using all of the files upload to our spcs_app database
 use role naspcs_role;
+--
+-- from CLI:
+--   export SNOWSQL_USER=...
+--   export SNOWSQL_PWD=...
+--   export SNOWSQL_ACCOUNT=...
+--   export SNOWSQL_ROLE=naspcs_role
+--   export SNOWSQL_DATABASE=spcs_app
+--   export SNOWSQL_SCHEMA=napp
+--   snowsql  -q 'put file://'$(pwd)'/app/src/* @app_stage/ overwrite=true auto_compress=false'
+--
 create application package spcs_app_pkg;
 alter application package spcs_app_pkg add version v1 using @spcs_app.napp.app_stage;
 grant install, develop on application package spcs_app_pkg to role nac;

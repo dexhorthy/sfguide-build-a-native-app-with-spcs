@@ -7,7 +7,7 @@
     >
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-    <v-toolbar-title>Simple Clerks App</v-toolbar-title>    
+    <v-toolbar-title>Simple Clerks App</v-toolbar-title>
   </v-app-bar>
 
     <v-main>
