@@ -3,7 +3,7 @@
 
 use role accountadmin;
 
-create user naspcs_user
+create user if not exists naspcs_user
     default_role = naspcs_role
     default_warehouse = wh_nap;
 grant role naspcs_role to user naspcs_user;
@@ -25,7 +25,7 @@ show images in image repository spcs_app.napp.img_repo;
 
 -- 2.1 create nac_user
 
-create user nac_user
+create user if not exists nac_user
     default_role = nac
     default_warehouse = wh_nac;
 grant role nac to user nac_user;
@@ -53,5 +53,5 @@ call spcs_app_instance.app_public.app_url();
 -- 6.1 Teardown
 
 use role ACCOUNTADMIN;
-drop user naspcs_user;
-drop user nac_user;
+drop user if exists naspcs_user;
+drop user if exists nac_user;

@@ -12,7 +12,7 @@ For prerequisites, environment setup, step-by-step guide and instructions, pleas
 
 This fork includes GitHub actions for CI/CD w/ the Snowpark Native app. 
 Once you've gone through the Quickstart Guide above, you can follow the [GitHub Actions setup](#github-actions-setup) to
-get things working with GitHub Actions. If you did the "delete everything" steps at the end of the guide, you'll want to go back in and recreate everything, and validate you can access the running application
+get things working with GitHub Actions. If you did the "delete everything" steps at the end of the guide, you'll want to go back in and recreate everything, and validate you can access the running application.
 
 See the [blog post draft](https://docs.google.com/document/d/1fTHpKovtuCUSGwNrdDbwOyJMJvByzGtZpRAkZ9leUng/edit) for more background and motivations behind this project.
 
@@ -20,7 +20,7 @@ See the [blog post draft](https://docs.google.com/document/d/1fTHpKovtuCUSGwNrdD
 
 ## GitHub Actions Setup
 
-Again, assuming you've gone through the other work in the Quickstart Guide, you can now set up GitHub Actions to build and deploy your Native App. All the assets you need are already here in this repository, including the SQL steps in [./scripts/github_actions_script.sql](./scripts/github_actions_script.sql) and the workflow in [./.github/workflows/snowpark-tag-push-publish-update.yml](./.github/workflows/snowpark-tag-push-publish-update.yml).
+Again, assuming you've gone through the other work in the Quickstart Guide, you can now set up GitHub Actions to build and deploy your Native App. All the assets you need are already here in this repository, including the SQL steps in [./scripts/github_actions_script.sql](./scripts/github_actions_script.sql) and the workflow in [./.github/workflows/snowpark-tag-push-publish-update.yaml](./.github/workflows/snowpark-tag-push-publish-update.yaml).
 
 ### 1.1 Create Packager User
 
@@ -84,12 +84,12 @@ use application spcs_app_instance;
 call app_public.app_url();
 ```
 
-### 3.1 Configuring credentials
+### 3.1 Configuring GitHub to store Snowflake credentials
 
-Next, we need to configure GitHub actions secrets to allow github to act on behalf of the users we created.
+Next, we need to configure GitHub actions secrets to allow GitHub to act on behalf of the users we created.
 You'll need admin on the repo where you set secrets.
 
-We'll use the simpler [Repository Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) method for this, but you're welcome to use any other secret method if you know what you're doing.
+We'll use the simpler [Repository Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) method, but you're welcome to use any other secret method if you know what you're doing.
 
 We'll set 5 secrets:
 
@@ -98,6 +98,10 @@ We'll set 5 secrets:
 3. `SNOWPARK_PUSH_SNOWFLAKE_PASSWORD` - the password for the packager user
 4. `SNOWPARK_CONSUMER_SNOWFLAKE_USERNAME` - the username for the consumer user, e.g. `nac_user`
 5. `SNOWPARK_CONSUMER_SNOWFLAKE_PASSWORD` - the password for the consumer user
+
+Your Repository's "Actions secrets and variables" section should look like this:
+![Completed Repository Secrets](images/secrets.png "Completed Repository Secrets")
+
 
 ### 4.1 Make a local change to test the pipeline
 
